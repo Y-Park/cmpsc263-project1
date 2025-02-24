@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <Nav>
-      <Logo onClick={() => logOut(setUser)} href="/">CMPSC 263</Logo>
+      {/* <Logo onClick={() => logOut(setUser)} href="/">CMPSC 263</Logo> */}
       <Home></Home>
       <NavLinks>
         <ButtonLink href="/auth/signup">Sign Up</ButtonLink>
