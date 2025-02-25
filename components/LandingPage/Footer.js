@@ -6,15 +6,15 @@ const Footer = () => {
     <FooterSection>
       <FooterContainer>
         <LeftContainer>
-          © {new Date().getFullYear()} CMPSC 263
+          © {new Date().getFullYear()} BookNest
         </LeftContainer>
         <CenterContainer>
           <Link href="#">Privacy Policy</Link> | <Link href="#">Terms of Service</Link>
         </CenterContainer>
         <RightContainer>
-          <SocialIcon href="#" aria-label="Facebook">FB</SocialIcon>
+          {/* <SocialIcon href="#" aria-label="Facebook">FB</SocialIcon>
           <SocialIcon href="#" aria-label="Twitter">TW</SocialIcon>
-          <SocialIcon href="#" aria-label="Instagram">IG</SocialIcon>
+          <SocialIcon href="#" aria-label="Instagram">IG</SocialIcon> */}
         </RightContainer>
       </FooterContainer>
     </FooterSection>
@@ -22,7 +22,10 @@ const Footer = () => {
 };
 
 const FooterSection = styled.footer`
-
+  display: flex;
+  font-family: Arial, sans-serif;
+  justify-content: center;
+  margin-top: 20px;
 `;
 
 const FooterContainer = styled.div`

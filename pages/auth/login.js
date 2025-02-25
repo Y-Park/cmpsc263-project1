@@ -24,15 +24,22 @@ const Login = () => {
     <>
     <Hero text={'BookNest'} />
     <Section>
-        <Header>Login</Header>
-        <InputTitle>Email</InputTitle>
-        <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-        <InputTitle>Password</InputTitle>
-        <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+        <Header>Log in</Header>
 
-        <UserAgreementText>By signing in, you automatically agree to our <UserAgreementSpan href='/legal/terms-of-use' rel="noopener noreferrer" target="_blank"> Terms of Use</UserAgreementSpan> and <UserAgreementSpan href='/legal/privacy-policy' rel="noopener noreferrer" target="_blank">Privacy Policy.</UserAgreementSpan></UserAgreementText>
+        <Wrapper>
+          <InputTitle>Email</InputTitle>
+          <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+        </Wrapper>
 
-        <MainButton onClick={handleLogin}>Login</MainButton>
+        <Wrapper>
+          <InputTitle>Password</InputTitle>
+          <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+        </Wrapper>
+
+        <UserAgreementText>
+          By logging in, you automatically agree to our <UserAgreementSpan href='/legal/terms-of-use' rel="noopener noreferrer" target="_blank"> Terms of Use</UserAgreementSpan> and <UserAgreementSpan href='/legal/privacy-policy' rel="noopener noreferrer" target="_blank">Privacy Policy.</UserAgreementSpan></UserAgreementText>
+
+        <ButtonLink onClick={handleLogin}>Log in</ButtonLink>
 
     </Section>
     </>
@@ -40,19 +47,42 @@ const Login = () => {
 }
 
 const Section = styled.section`
+  font-family: Arial, sans-serif;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 40vh;
+`;
+
+const ButtonLink = styled.button`
+  font-family: 'Arial', sans-serif;
+  text-decoration: none;
+  color: white;
+  background-color: black;
+  padding: 10px 20px;
+  border-radius: 50px;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `;
 
 const Header = styled.h1`
-  font-size: 24px; /* Adjusted for better scalability */
+  font-size: 24px;
 `;
 
 const Input = styled.input`
   font-size: 16px;
-
+  font-family: Arial, sans-serif;
+  width: 80%;
+  
 `;
 
-const InputTitle = styled.label` /* Changed to label for semantics */
+const InputTitle = styled.label`
   font-size: 14px;
   color: #666;
 `;

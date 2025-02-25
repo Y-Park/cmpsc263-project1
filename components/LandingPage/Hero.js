@@ -11,7 +11,7 @@ const Hero = ({text}) => {
             <Header href="/">{text}</Header>
             <ButtonContainer>
               <ButtonLink href="/auth/signup">Sign Up</ButtonLink>
-              <ButtonLink href="/auth/login">Login</ButtonLink>
+              <ButtonLink href="/auth/login">Log in</ButtonLink>
             </ButtonContainer>
           </Wrapper>
           <StyleDiv>Your Go-To Platform for Books</StyleDiv>
@@ -37,7 +37,7 @@ const Wrapper = styled.div`
   gap: 15px;
 `;
 
-const Header = styled.div`
+const Header = styled(Link)`
   font-family: 'Arial', sans-serif;
   font-size: 40px;
   text-decoration: none;

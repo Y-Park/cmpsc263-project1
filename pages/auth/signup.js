@@ -6,6 +6,7 @@ import { useStateContext } from '@/context/StateContext'
 import { isEmailInUse, register} from '@/backend/Auth'
 import Link from 'next/link'
 import Navbar from '@/components/Dashboard/Navbar'
+
 const Signup = () => {
 
   const { user, setUser } = useStateContext()
@@ -48,14 +49,20 @@ const Signup = () => {
     <Hero text={'BookNest'} />
     <Section>
         <Header>Signup</Header>
+
+        <Wrapper>
         <InputTitle>Email</InputTitle>
         <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+        </Wrapper>
+
+        <Wrapper>
         <InputTitle>Password</InputTitle>
         <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+        </Wrapper>
 
         <UserAgreementText>By signing in, you automatically agree to our <UserAgreementSpan href='/legal/terms-of-use' rel="noopener noreferrer" target="_blank"> Terms of Use</UserAgreementSpan> and <UserAgreementSpan href='/legal/privacy-policy' rel="noopener noreferrer" target="_blank">Privacy Policy.</UserAgreementSpan></UserAgreementText>
 
-        <MainButton onClick={handleSignup}>Signup</MainButton>
+        <ButtonLink onClick={handleSignup}>Signup</ButtonLink>
 
     </Section>
     </>
@@ -63,7 +70,28 @@ const Signup = () => {
 }
 
 const Section = styled.section`
+  font-family: Arial, sans-serif;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 50vh;
+`;
+
+const ButtonLink = styled.button`
+  font-family: 'Arial', sans-serif;
+  text-decoration: none;
+  color: white;
+  background-color: black;
+  padding: 10px 20px;
+  border-radius: 50px;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `;
 
 const Header = styled.h1`
@@ -72,6 +100,8 @@ const Header = styled.h1`
 
 const Input = styled.input`
   font-size: 16px;
+  font-family: Arial, sans-serif;
+  width: 80%;
 
 `;
 
