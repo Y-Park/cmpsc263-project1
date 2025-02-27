@@ -19,6 +19,7 @@ const Hero = ({text}) => {
   );
 };
 
+
 const Section = styled.section`
 background-color: orange;
 width: 100%;
@@ -73,17 +74,6 @@ const ButtonContainer = styled.nav`
   margin-left: auto;
   margin-right: 20px;
 `;
-
-const Highlight = styled.span`
-`;
-
-const SubHeader = styled.h2`
-font-family: 'Times New Roman', serif;
-font-size: 25px;
-text-align: left;
-`;
-
-
 
 
 export default Hero;
