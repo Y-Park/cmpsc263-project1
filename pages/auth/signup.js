@@ -1,16 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Hero from "@/components/LandingPage/Hero"
 import styled from 'styled-components'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import { useStateContext } from '@/context/StateContext'
-import { isEmailInUse, register} from '@/backend/Auth'
+import { isEmailInUse } from '@/backend/Auth'
 import Link from 'next/link'
 import Navbar from '@/components/Dashboard/Navbar'
+import { auth } from '@/backend/Firebase'
 
 const Signup = () => {
 
   const { user, setUser } = useStateContext()
   const [ email, setEmail ] = useState('')
+  const [ username, setUsername ] = useState('')
   const [ password, setPassword ] = useState('')
 
   const router = useRouter()
@@ -18,31 +21,43 @@ const Signup = () => {
   async function validateEmail(){
     const emailRegex = /^[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     if(emailRegex.test(email) == false ){
-        return false;
+        return 2;
     }
-    console.log('so far so good...')
-    const emailResponse = await isEmailInUse(email)
-    console.log('email response', emailResponse)
-    if(emailResponse.length == 0 ){
-        return false;
-    }
+    // console.log('so far so good...')
+    // const emailResponse = await isEmailInUse(email)
+    // console.log('email response', emailResponse)
+    // if(emailResponse.length > 0 ){
+    //     return 1;
+    // }
 
-    return true;
+    return 0;
 }
 
   async function handleSignup(){
-    const isValidEmail = await validateEmail()
-    // console.log('isValidEmail', isValidEmail)
-    // if(!isValidEmail){ return; }
-    
+    const emailResult = await validateEmail()
+    if(emailResult === 2){
+      alert("Invalid email "); 
+      return;
+    } else if (emailResult === 1){
+      alert("Address already in use "); 
+      return;
+    }
     try{
-        await register(email, password, setUser)
+        const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
+        setUser(userCredentials.user);
         router.push('/dashboard')
     }catch(err){
-        console.log('Error Signing Up', err)
+        alert(`Error Signing Up: ${err}`)
     }
   }
-
+  
+  useEffect(() => {
+      if(user){
+        router.push('/dashboard')
+      }else{
+  
+      }
+    }, user)
 
   return (
     <>

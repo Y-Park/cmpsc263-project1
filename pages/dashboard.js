@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import OpenAI from 'openai'
+import { openai } from '@ai-sdk/openai'
 import Hero from "@/components/LandingPage/Hero"
 import styled from 'styled-components'
 import Link from 'next/link'
@@ -10,18 +10,18 @@ import { useRouter } from 'next/router'
 
 const Dashboard = () => {
 
-  // const { user } = useStateContext()  
+  const { user } = useStateContext()  
 
-  // const router = useRouter()
+  const router = useRouter()
 
 
-  // useEffect(() => {
-  //   if(!user){
-  //     router.push('/')
-  //   }else{
+  useEffect(() => {
+    if(!user){
+      router.push('/')
+    }else{
 
-  //   }
-  // }, user)
+    }
+  }, user)
 
 
   return (

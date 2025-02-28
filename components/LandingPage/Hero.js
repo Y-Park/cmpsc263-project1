@@ -1,20 +1,30 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link'
-
+import { auth } from '@/backend/Firebase'
+import { createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import { useStateContext } from '@/context/StateContext';
 
 const Hero = ({text}) => {
-  const [user, setUser] = useState(null);
+  const {user} = useStateContext(); // global user state
+
   return (
     <Section>
           <Wrapper>
             <Header href="/">{text}</Header>
             <ButtonContainer>
-              <ButtonLink href="/auth/signup">Sign Up</ButtonLink>
-              <ButtonLink href="/auth/login">Log in</ButtonLink>
+              {user ? 
+              <>
+                <ButtonLink href="/dashboard">Dashboard</ButtonLink>
+                <ButtonLink onClick={() => signOut(auth)} href='/'>Sign Out</ButtonLink>
+              </> : 
+              <>
+                <ButtonLink href="/auth/signup">Sign Up</ButtonLink>
+                <ButtonLink href="/auth/login">Log in</ButtonLink>
+              </>}
+              
             </ButtonContainer>
           </Wrapper>
-          <StyleDiv>Your Go-To Platform for Books</StyleDiv>
     </Section>
   );
 };
@@ -35,6 +45,8 @@ const Container = styled.div`
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  height: 50px;
+  padding-top: 30px;
   gap: 15px;
 `;
 
@@ -66,13 +78,27 @@ const ButtonLink = styled.a`
   background-color: black;
   padding: 10px 20px;
   border-radius: 50px;
+  display: inline-block;
+`;
+
+const Logout = styled.button`
+  font-family: 'Arial', sans-serif;
+  text-decoration: none;
+  color: white;
+  background-color: black;
+  padding: 10px 20px;
+  border-radius: 50px;
+  &:hover {
+    background-color: #333;
+    cursor: pointer;
+  }
 `;
 
 const ButtonContainer = styled.nav`
   display: flex;
-  gap: 15px;
+  gap: 20px;
   margin-left: auto;
-  margin-right: 20px;
+  margin-right: 30px;
 `;
 
 

@@ -21,6 +21,7 @@ import { getAuth } from "firebase/auth";
 //   appId: "",
 //   measurementId: ""
 // }
+
 const firebaseConfig = {
     apiKey: "AIzaSyBOPJzRsZVPPNcBFRgzqjOTh_PWUbTzgOU",
     authDomain: "sellegg-ec3cb.firebaseapp.com",
@@ -29,7 +30,8 @@ const firebaseConfig = {
     messagingSenderId: "651421375018",
     appId: "1:651421375018:web:4ebca439c56feb84054153",
     measurementId: "G-JDJV0N157S"
-  };
+};
+
   
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

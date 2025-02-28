@@ -1,24 +1,44 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Hero from "@/components/LandingPage/Hero"
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
 import { useStateContext } from '@/context/StateContext'
 import {login, isEmailInUse} from '@/backend/Auth'
 import Link from 'next/link'
+import { auth } from '@/backend/Firebase'
 import Navbar from '@/components/Dashboard/Navbar'
+import { signInWithCredential, signInWithEmailAndPassword } from 'firebase/auth'
 const Login = () => {
 
   const { user, setUser } = useStateContext()
   const [ email, setEmail ] = useState('')
+  const [ username, setUsername ] = useState('')
   const [ password, setPassword ] = useState('')
 
   const router = useRouter()
 
 
   async function handleLogin(){
+    if(!email || !password){
+      alert("Please fill both fields.")
+      return;
+    }
 
+    try{
+      const userCredentials = await signInWithEmailAndPassword(auth, email, password)
+    } catch(err){
+      alert(`Error: ${err}`)
+    }
   }
-
+  
+  useEffect(() => {
+      if(user){
+        router.push('/dashboard')
+      }else{
+  
+      }
+    }, user)
+  
 
   return (
     <>
@@ -28,7 +48,7 @@ const Login = () => {
 
         <Wrapper>
           <InputTitle>Email</InputTitle>
-          <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+          <Input type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
         </Wrapper>
 
         <Wrapper>
@@ -56,13 +76,14 @@ const Section = styled.section`
   height: 40vh;
 `;
 
-const ButtonLink = styled.button`
+const ButtonLink = styled.a`
   font-family: 'Arial', sans-serif;
   text-decoration: none;
   color: white;
   background-color: black;
   padding: 10px 20px;
   border-radius: 50px;
+  
 `;
 
 const Wrapper = styled.div`
