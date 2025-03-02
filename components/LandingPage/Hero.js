@@ -33,7 +33,7 @@ const Hero = ({text}) => {
 const Section = styled.section`
 background-color: orange;
 width: 100%;
-height:10vh;
+height: 80px;
 `;
 
 const Overlay = styled.div`
@@ -55,7 +55,6 @@ const Header = styled(Link)`
   font-size: 40px;
   text-decoration: none;
   color: white;
-  background-color: orange;
   padding: 10px 20px;
   border-radius: 5px;
   font-weight: bold;

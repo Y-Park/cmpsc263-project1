@@ -45,22 +45,16 @@ const Login = () => {
     <Hero text={'BookNest'} />
     <Section>
         <Header>Log in</Header>
-
         <Wrapper>
           <InputTitle>Email</InputTitle>
           <Input type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
         </Wrapper>
-
         <Wrapper>
           <InputTitle>Password</InputTitle>
           <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
         </Wrapper>
-
-        <UserAgreementText>
-          By logging in, you automatically agree to our <UserAgreementSpan href='/legal/terms-of-use' rel="noopener noreferrer" target="_blank"> Terms of Use</UserAgreementSpan> and <UserAgreementSpan href='/legal/privacy-policy' rel="noopener noreferrer" target="_blank">Privacy Policy.</UserAgreementSpan></UserAgreementText>
-
         <ButtonLink onClick={handleLogin}>Log in</ButtonLink>
-
+        <UserAgreementText>By logging in, you automatically agree to our <UserAgreementSpan href='/legal/terms-of-use' rel="noopener noreferrer" target="_blank"> Terms of Use</UserAgreementSpan> and <UserAgreementSpan href='/legal/privacy-policy' rel="noopener noreferrer" target="_blank">Privacy Policy.</UserAgreementSpan></UserAgreementText>
     </Section>
     </>
   )
@@ -73,7 +67,7 @@ const Section = styled.section`
   align-items: center;
   justify-content: center;
   gap: 10px;
-  height: 40vh;
+  height: 450px;
 `;
 
 const ButtonLink = styled.a`
@@ -82,8 +76,13 @@ const ButtonLink = styled.a`
   color: white;
   background-color: black;
   padding: 10px 20px;
+  margin-top: 10px;
   border-radius: 50px;
-  
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover{
+  background-color:#333;
+  };
 `;
 
 const Wrapper = styled.div`

@@ -6,22 +6,25 @@ import Link from 'next/link'
 import Navbar from '@/components/Dashboard/Navbar'
 import { useStateContext } from '@/context/StateContext'
 import { useRouter } from 'next/router'
-
+import { auth } from '@/backend/Firebase'
+import { onAuthStateChanged } from 'firebase/auth'
 
 const Dashboard = () => {
 
-  const { user } = useStateContext()  
-
+  const { user, setUser } = useStateContext() 
   const router = useRouter()
 
 
   useEffect(() => {
-    if(!user){
-      router.push('/')
-    }else{
-
-    }
-  }, user)
+    const unsubscribe = onAuthStateChanged(auth,(currentUser) => {
+      if (currentUser){
+        setUser(currentUser)
+      } else {
+        router.push('/')
+      }
+    })
+    return () => unsubscribe();
+  }, [router, setUser])
 
 
   return (

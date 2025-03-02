@@ -17,11 +17,11 @@ export default function Home() {
     <>
         {/* <Hero text={'BookNest'} /> */}
         <ImageContainer>
-          <Image
+          {/* <Image
             src = "/img2.png"
             width = {800}
             height = {800}
-          />
+          /> */}
 
           <Wrapper>
             BookNest
@@ -44,8 +44,8 @@ export default function Home() {
           </Wrapper>
           <Image
             src = "/img2.png"
-            width = {800}
-            height = {800}
+            width = {900}
+            height = {900}
           />
         </ImageContainer>
       <Footer/>
@@ -63,16 +63,16 @@ const ImageContainer = styled.section`
 
 const Wrapper = styled.div`
   font-family: 'Arial', sans-serif;
-  font-size: 60px;
+  font-size: 80px;
   text-decoration: none;
   color: white;
   background-color: orange;
   justify-content: center;
-  height: 800px;
+  height: 900px;
 
-  padding-top: 150px;
-  padding-right: 200px;
-  padding-left: 180px;
+  padding-top: 180px;
+  padding-right: 160px;
+  padding-left: 80px;
   border-radius: 0px;
   font-weight: bold;
 `;
@@ -81,13 +81,13 @@ const Sub = styled.div`
   font-family: 'Arial', sans-serif;
   font-size: 25px;
   justify-content: center;
-  margin-top: 10px;
+  padding-top: 20px;
   font-weight: normal;
 `
 
 const ButtonLink = styled.a`
   font-family: 'Arial', sans-serif;
-  font-size: 17px;
+  font-size: 25px;
   text-decoration: none;
   color: white;
   background-color: black;
@@ -110,7 +110,8 @@ const ButtonLinkSignOut = styled.a`
 
 const ButtonLinkContainer = styled.div`
   display:flex;
-  gap: 30px;
+  gap: 40px;
+  padding-top: 30px
 
 `
 

@@ -50,7 +50,7 @@ const Signup = () => {
         alert(`Error Signing Up: ${err}`)
     }
   }
-  
+
   useEffect(() => {
       if(user){
         router.push('/dashboard')
@@ -64,21 +64,16 @@ const Signup = () => {
     <Hero text={'BookNest'} />
     <Section>
         <Header>Signup</Header>
-
         <Wrapper>
-        <InputTitle>Email</InputTitle>
-        <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+          <InputTitle>Email</InputTitle>
+          <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
         </Wrapper>
-
         <Wrapper>
-        <InputTitle>Password</InputTitle>
-        <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+          <InputTitle>Password</InputTitle>
+          <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
         </Wrapper>
-
-        <UserAgreementText>By signing in, you automatically agree to our <UserAgreementSpan href='/legal/terms-of-use' rel="noopener noreferrer" target="_blank"> Terms of Use</UserAgreementSpan> and <UserAgreementSpan href='/legal/privacy-policy' rel="noopener noreferrer" target="_blank">Privacy Policy.</UserAgreementSpan></UserAgreementText>
-
         <ButtonLink onClick={handleSignup}>Signup</ButtonLink>
-
+        <UserAgreementText>By signing in, you automatically agree to our <UserAgreementSpan href='/legal/terms-of-use' rel="noopener noreferrer" target="_blank"> Terms of Use</UserAgreementSpan> and <UserAgreementSpan href='/legal/privacy-policy' rel="noopener noreferrer" target="_blank">Privacy Policy.</UserAgreementSpan></UserAgreementText>
     </Section>
     </>
   )
@@ -91,16 +86,22 @@ const Section = styled.section`
   align-items: center;
   justify-content: center;
   gap: 10px;
-  height: 50vh;
+  height: 450px;
 `;
 
-const ButtonLink = styled.button`
+const ButtonLink = styled.a`
   font-family: 'Arial', sans-serif;
   text-decoration: none;
   color: white;
   background-color: black;
   padding: 10px 20px;
+  margin-top: 10px;
   border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover{
+  background-color:#333;
+  };
 `;
 
 const Wrapper = styled.div`
@@ -110,7 +111,7 @@ const Wrapper = styled.div`
 `;
 
 const Header = styled.h1`
-  font-size: 24px; /* Adjusted for better scalability */
+  font-size: 24px; 
 `;
 
 const Input = styled.input`
@@ -120,8 +121,9 @@ const Input = styled.input`
 
 `;
 
-const InputTitle = styled.label` /* Changed to label for semantics */
+const InputTitle = styled.label` 
   font-size: 14px;
+  color: #666;
 `;
 
 const MainButton = styled.button`
@@ -131,10 +133,20 @@ const MainButton = styled.button`
 
 const UserAgreementText = styled.p`
   font-size: 12px;
+  color: #666;
+  margin-top: 20px;
+  text-align: center;
 `;
 
 const UserAgreementSpan = styled(Link)` 
   color: #007bff;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+  &:not(:last-of-type)::after {
+    content: ', '; /* Adds comma between links */
+  }
 
 `;
 
