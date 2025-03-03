@@ -12,6 +12,7 @@ const Hero = ({text}) => {
     <Section>
           <Wrapper>
             <Header href="/">{text}</Header>
+            <SearchLink href="/search">Search Books</SearchLink>
             <ButtonContainer>
               {user ? 
               <>
@@ -47,7 +48,7 @@ const Wrapper = styled.div`
   align-items: center;
   height: 50px;
   padding-top: 30px;
-  gap: 15px;
+  gap: 20px;
 `;
 
 const Header = styled(Link)`
@@ -77,6 +78,19 @@ const ButtonLink = styled.a`
   background-color: black;
   padding: 10px 20px;
   border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover{
+  background-color:#333;
+  };
+`;
+
+const SearchLink = styled.a`
+  font-family: 'Arial', sans-serif;
+  font-size: 14px
+  text-decoration: none;
+  color: white;
+  padding: 10px 20px;
   display: inline-block;
 `;
 

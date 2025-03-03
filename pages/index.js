@@ -1,8 +1,6 @@
 import Hero from "@/components/LandingPage/Hero"
 import { styled } from 'styled-components'
-import Navbar from "@/components/Dashboard/Navbar"
 import Footer from "@/components/LandingPage/Footer"
-import Layout from "@/components/Layout"
 import Image from "next/image"
 import Link from 'next/link'
 import React, { useState, useEffect, useContext } from 'react';
