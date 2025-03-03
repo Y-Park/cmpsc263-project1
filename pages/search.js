@@ -47,9 +47,15 @@ const Dashboard = () => {
       return;
     }
     try{
-      const result = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchType}:${query}&key=${book_object.key}&maxResults=40`);
+      const result = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchType}:${query}&key=${process.env.NEXT_PUBLIC_BOOKS_KEY}&maxResults=40`);
       const data = await result.json();
-      setBooks(data.items || []);
+      if(data.items){
+        setBooks(data.items);
+        return;
+      } else {
+        alert(`Error fetching book list.`)
+      }
+      
     } catch(err){
       alert(`Error fetching book data: ${err}`)
     }  
