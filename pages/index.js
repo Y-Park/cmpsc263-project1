@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useStateContext } from '@/context/StateContext';
 import { auth } from '@/backend/Firebase'
 import { signOut } from 'firebase/auth';
+import Link from 'next/link';
 
 export default function Home() {
   const {user} = useStateContext(); // global user state
@@ -11,7 +12,6 @@ export default function Home() {
   async function handleSignOut() {
       try {
         await signOut(auth);
-        router.push('/');
       } catch (err) {
         alert(`Error signing out: ${err}`);
       }
@@ -84,7 +84,7 @@ const Sub = styled.div`
   font-weight: normal;
 `
 
-const ButtonLink = styled.a`
+const ButtonLink = styled(Link)`
   font-family: 'Arial', sans-serif;
   font-size: 25px;
   text-decoration: none;
