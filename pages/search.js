@@ -23,6 +23,7 @@ const Dashboard = () => {
 
   const openBook = (book) => {
     setSelectedBook({
+      id: book.id,
       title: book.volumeInfo.title,
       authors: book.volumeInfo.authors,
       image: book.volumeInfo.imageLinks?.thumbnail || "/placeholder.png",

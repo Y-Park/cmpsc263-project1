@@ -2,10 +2,41 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import OpenAI from "openai";
 import openai from "@/backend/openai";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { app, database, auth } from '@/backend/Firebase';
+import { useStateContext } from "@/context/StateContext";
 
 
 const BookOverlay = ({ book, onClose }) => {
   const [summary, setSummary] = useState("Generating summary...");
+  const {user} = useStateContext();
+
+  async function markBook() {
+    if (!user) return;
+    try {
+    //   title: book.volumeInfo.title,
+    //   authors: book.volumeInfo.authors,
+    //   image: book.volumeInfo.imageLinks?.thumbnail || "/placeholder.png",
+    //   link: book.volumeInfo.infoLink,
+        const userBook = doc(database, "users", user.uid, "markedBooks", book.id);
+        if ((await getDoc(userBook)).exists()){
+            alert("Book is already marked.");
+            return;
+        }
+
+        await setDoc(userBook, {
+            uid: user.uid,
+            id: book.id,
+            title: book.title,
+            authors: book.authors,
+            image: book.image,
+            link: book.link
+        });
+        alert("Successfully marked book!")
+    } catch(err){
+        alert(`Error marking book: ${err}`)
+    }
+  }
 
   async function fetchSummary() {
     try {
@@ -46,7 +77,7 @@ const BookOverlay = ({ book, onClose }) => {
             <ButtonLink href={book.link} target="_blank">
                 More Info
             </ButtonLink> 
-            <ButtonLink>
+            <ButtonLink onClick={markBook}>
                 Mark Book
             </ButtonLink>
         </ButtonContainer>
