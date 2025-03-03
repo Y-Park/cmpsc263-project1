@@ -16,7 +16,7 @@ const Hero = ({text}) => {
             <ButtonContainer>
               {user ? 
               <>
-                <ButtonLink href="/dashboard">Dashboard</ButtonLink>
+                <ButtonLink href="/dashboard">My Books</ButtonLink>
                 <ButtonLink onClick={() => signOut(auth)} href='/'>Sign Out</ButtonLink>
               </> : 
               <>

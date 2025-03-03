@@ -8,7 +8,8 @@ import { useStateContext } from '@/context/StateContext'
 import { useRouter } from 'next/router'
 import { auth } from '@/backend/Firebase'
 import { onAuthStateChanged } from 'firebase/auth'
-import books from '@/backend/books'
+import book_object from '@/backend/books'
+import BookOverlay from '@/components/BookOverlay'
 
 const Dashboard = () => {
 
@@ -18,6 +19,18 @@ const Dashboard = () => {
   const [searchType, setSearchType] = useState("intitle");
   const [query, setQuery] = useState("");
   const [books, setBooks] = useState([]);
+  const [selectedBook, setSelectedBook] = useState(null)
+
+  const openBook = (book) => {
+    setSelectedBook({
+      title: book.volumeInfo.title,
+      authors: book.volumeInfo.authors,
+      image: book.volumeInfo.imageLinks?.thumbnail || "/placeholder.png",
+      link: book.volumeInfo.infoLink,
+    });
+  }
+
+  const closeBook = () => setSelectedBook(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth,(currentUser) => {
@@ -36,8 +49,8 @@ const Dashboard = () => {
       return;
     }
     try{
-      const result = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchType}:${query}&key=&maxResults=40`);
-      // const result = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchType}:${query}&key=${process.env.NEXT_PUBLIC_BOOKS_KEY}&maxResults=40`);
+      const result = await fetch(`${book_object.url}?q=${searchType}:${query}&key=AIzaSyDbf3NXIMmu3cN0anQYbBUJpgQ_k-lWV0k&maxResults=40`);
+      // const result = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchType}:${query}&key=${book_object.key}&maxResults=40`);
       const data = await result.json();
       setBooks(data.items || []);
     } catch(err){
@@ -49,7 +62,6 @@ const Dashboard = () => {
   return (
     <>
       <Hero text={'BookNest'} />
-      <Section>
         <Container>
           <H2>Search Books</H2>
           <SearchBar>
@@ -58,7 +70,12 @@ const Dashboard = () => {
               <option value = "inauthor">Author</option>
               <option value = "isbn">ISBN</option>
             </select>
-            <input type = "text" placeholder = "Enter search term here." value = {query} onChange={(e) => setQuery(e.target.value)}/>
+            <input 
+            type = "text" 
+            placeholder = "Enter search term here." 
+            value = {query} 
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()}/>
             <ButtonLinkContainer>
             <ButtonLink onClick = {handleSearch}>Search</ButtonLink>
             </ButtonLinkContainer>
@@ -70,18 +87,15 @@ const Dashboard = () => {
                 <BookCard key={index}>
                   <img
                     src={book.volumeInfo.imageLinks?.thumbnail || "/placeholder.png"}
-                    alt={book.volumeInfo.title}
-
-                    // Image size only for placeholder
-                    
+                    onClick={() => openBook(book)}
                   />
                   <div>
                     <h3>{book.volumeInfo.title}</h3>
                     <p>Author: {book.volumeInfo.authors?.join(", ") || "N/A"}</p>
                     <p>Published: {book.volumeInfo.publishedDate || "N/A"}</p>
-                    <a href={book.volumeInfo.infoLink} target="_blank">
+                    {/* <a href={book.volumeInfo.infoLink} target="_blank">
                       More Info
-                    </a>
+                    </a> */}
                   </div>
                 </BookCard>
               ))
@@ -91,7 +105,7 @@ const Dashboard = () => {
           </Results>
 
         </Container>
-      </Section>
+      {selectedBook && <BookOverlay book={selectedBook} onClose={closeBook} />}
     </>
   )
 }
@@ -122,8 +136,10 @@ const SearchBar = styled.div`
   padding-top: 10px;
   margin-top: 10px;
   gap: 20px;
+
   select {
     width: 100px;
+    height: 30px;
   }
 
   input {
@@ -164,18 +180,20 @@ const BookCard = styled.div`
   justify-content: space-evenly; 
   align-items: center;
   gap: 50px;
-  height: 190px;
+  height: 150px;
   border-bottom: 1px solid #ddd;
 
   img {
     flex-shrink: 0;
-    width: 120px;
-    height: 180px;
+    width: 90px;
+    height: 120px;
     object-fit: cover;
+    border: 2px solid #ddd;
+    cursor: pointer;
   }
 
   div {
-    display: flex;
+    display: flex-start;
     justify-content: flex-start;
     flex-direction: column;
     max-width: 400px;

@@ -7,6 +7,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useStateContext } from '@/context/StateContext';
 import { auth } from '@/backend/Firebase'
 import { createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import BookOverlay from "@/components/BookOverlay"
 
 export default function Home() {
   const {user} = useStateContext(); // global user state
@@ -30,7 +31,7 @@ export default function Home() {
             <ButtonLinkContainer> 
             {user ? 
               <>
-                <ButtonLink href="/dashboard">Dashboard</ButtonLink>
+                <ButtonLink href="/search">Dive In</ButtonLink>
                 <ButtonLink onClick={() => signOut(auth)} href='/'>Sign Out</ButtonLink>
               </> : 
               <>
