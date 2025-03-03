@@ -50,8 +50,7 @@ const Dashboard = () => {
       return;
     }
     try{
-      const result = await fetch(`${book_object.url}?q=${searchType}:${query}&key=AIzaSyDbf3NXIMmu3cN0anQYbBUJpgQ_k-lWV0k&maxResults=40`);
-      // const result = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchType}:${query}&key=${book_object.key}&maxResults=40`);
+      const result = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchType}:${query}&key=${book_object.key}&maxResults=40`);
       const data = await result.json();
       setBooks(data.items || []);
     } catch(err){

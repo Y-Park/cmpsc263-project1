@@ -58,14 +58,13 @@ const Dashboard = () => {
           <BookCard key={index}>
             <img
               src={book.image || "/placeholder.png"}
-              onClick={() => openBook(book)}
             />
             <div>
               <h3>{book.title}</h3>
               <p>Author: {book.authors?.join(", ") || "N/A"}</p>
-              { <a href={book.link} target="_blank">
+              <ButtonLink href={book.link} target="_blank">
                 More Info
-              </a> }
+              </ButtonLink>
             </div>
           </BookCard>)) : 
           <NoBooks>No marked books.</NoBooks>}
@@ -76,28 +75,6 @@ const Dashboard = () => {
   )
 }
 
-{/* <Results>
-            {books.length > 0 ? (
-              books.map((book, index) => (
-                <BookCard key={index}>
-                  <img
-                    src={book.volumeInfo.imageLinks?.thumbnail || "/placeholder.png"}
-                    onClick={() => openBook(book)}
-                  />
-                  <div>
-                    <h3>{book.volumeInfo.title}</h3>
-                    <p>Author: {book.volumeInfo.authors?.join(", ") || "N/A"}</p>
-                    <p>Published: {book.volumeInfo.publishedDate || "N/A"}</p>
-                    {/* <a href={book.volumeInfo.infoLink} target="_blank">
-                      More Info
-                    </a> }
-                  </div>
-                </BookCard>
-              ))
-            ) : (
-              <NoResults>No results found.</NoResults>
-            )}
-          </Results> */}
 
 //STYLED COMPONENTS
 const Section = styled.section`
@@ -139,14 +116,14 @@ const BookCard = styled.div`
     height: 120px;
     object-fit: cover;
     border: 2px solid #ddd;
-    cursor: pointer;
   }
 
   div {
-    display: flex-start;
+    display: flex;
     justify-content: flex-start;
     flex-direction: column;
     max-width: 400px;
+    gap: 5px;
   }
 
   h3 {
@@ -156,7 +133,6 @@ const BookCard = styled.div`
   }
 
   p {
-    font-family: 'Arial', sans-serif;
     text-overflow: ellipsis;
     max-width: 300px;
   }
@@ -185,13 +161,15 @@ const ButtonLink = styled.a`
   color: white;
   background-color: black;
   padding: 7px 14px;
-  margin-top: 10px;
+  margin-left: 45px;
+  margin-top: 5px;
   border-radius: 30px;
   cursor: pointer;
   transition: background-color 0.3s;
   &:hover{
   background-color:#333;
   };
+  max-width: 100px;
 `;
 
 export default Dashboard
