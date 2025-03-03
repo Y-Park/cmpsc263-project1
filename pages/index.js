@@ -3,9 +3,19 @@ import Footer from "@/components/LandingPage/Footer"
 import Image from "next/image"
 import { useStateContext } from '@/context/StateContext';
 import { auth } from '@/backend/Firebase'
+import { signOut } from 'firebase/auth';
 
 export default function Home() {
   const {user} = useStateContext(); // global user state
+
+  async function handleSignOut() {
+      try {
+        await signOut(auth);
+        router.push('/');
+      } catch (err) {
+        alert(`Error signing out: ${err}`);
+      }
+    }
 
   return (
     <>
@@ -22,7 +32,7 @@ export default function Home() {
             {user ? 
               <>
                 <ButtonLink href="/search">Dive In</ButtonLink>
-                <ButtonLink onClick={() => signOut(auth)} href='/'>Sign Out</ButtonLink>
+                <ButtonLink onClick={handleSignOut} href='/'>Sign Out</ButtonLink>
               </> : 
               <>
                 <ButtonLink href="/auth/signup">Sign Up</ButtonLink>

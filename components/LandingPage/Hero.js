@@ -7,6 +7,7 @@ import { useStateContext } from '@/context/StateContext';
 
 const Hero = ({text}) => {
   const {user} = useStateContext(); // global user state
+  
 
   return (
     <Section>
