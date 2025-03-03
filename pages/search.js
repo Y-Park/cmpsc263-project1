@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { openai } from '@ai-sdk/openai'
 import Hero from "@/components/LandingPage/Hero"
 import styled from 'styled-components'
-import Link from 'next/link'
-import Navbar from '@/components/Dashboard/Navbar'
 import { useStateContext } from '@/context/StateContext'
 import { useRouter } from 'next/router'
 import { auth } from '@/backend/Firebase'
@@ -87,6 +84,7 @@ const Dashboard = () => {
                 <BookCard key={index}>
                   <img
                     src={book.volumeInfo.imageLinks?.thumbnail || "/placeholder.png"}
+                    alt={book.volumeInfo.title}
                     onClick={() => openBook(book)}
                   />
                   <div>
@@ -193,7 +191,7 @@ const BookCard = styled.div`
   }
 
   div {
-    display: flex-start;
+    display: flex;
     justify-content: flex-start;
     flex-direction: column;
     max-width: 400px;
@@ -226,7 +224,6 @@ const BookCard = styled.div`
 `
 
 const ButtonLinkContainer = styled.div`
-  justify-content:10px;
   padding-top: 7px
 `
 const NoResults = styled.p`

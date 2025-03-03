@@ -4,9 +4,7 @@ import styled from 'styled-components'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import { useStateContext } from '@/context/StateContext'
-import { isEmailInUse } from '@/backend/Auth'
 import Link from 'next/link'
-import Navbar from '@/components/Dashboard/Navbar'
 import { auth } from '@/backend/Firebase'
 
 const Signup = () => {

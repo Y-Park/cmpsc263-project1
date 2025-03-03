@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { openai } from '@ai-sdk/openai'
 import Hero from "@/components/LandingPage/Hero"
 import styled from 'styled-components'
-import Link from 'next/link'
-import Navbar from '@/components/Dashboard/Navbar'
 import { useStateContext } from '@/context/StateContext'
 import { useRouter } from 'next/router'
 import { auth, database } from '@/backend/Firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import { collection } from 'firebase/firestore'
-import { getDocs, getDoc, setDoc } from 'firebase/firestore'
+import { getDocs } from 'firebase/firestore'
 
 
 const Dashboard = () => {

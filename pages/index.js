@@ -1,13 +1,9 @@
-import Hero from "@/components/LandingPage/Hero"
+
 import { styled } from 'styled-components'
 import Footer from "@/components/LandingPage/Footer"
 import Image from "next/image"
-import Link from 'next/link'
-import React, { useState, useEffect, useContext } from 'react';
 import { useStateContext } from '@/context/StateContext';
 import { auth } from '@/backend/Firebase'
-import { createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
-import BookOverlay from "@/components/BookOverlay"
 
 export default function Home() {
   const {user} = useStateContext(); // global user state
