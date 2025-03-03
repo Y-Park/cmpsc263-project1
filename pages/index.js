@@ -1,4 +1,3 @@
-
 import { styled } from 'styled-components'
 import Footer from "@/components/LandingPage/Footer"
 import Image from "next/image"
@@ -10,13 +9,8 @@ export default function Home() {
 
   return (
     <>
-        {/* <Hero text={'BookNest'} /> */}
         <ImageContainer>
-          {/* <Image
-            src = "/img2.png"
-            width = {800}
-            height = {800}
-          /> */}
+
 
           <Wrapper>
             BookNest
