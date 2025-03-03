@@ -1,5 +1,5 @@
 {
-  "name": "mvp-starter",
+  "name": "booknest",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,7 +15,7 @@
     "babel-plugin-styled-components": "^2.1.4",
     "crypto": "^1.0.1",
     "firebase": "^10.8.1",
-    "mvp-starter": "file:",
+    "booknest": "file:",
     "next": "13.5.4",
     "openai": "^4.85.4",
     "react": "^18",
