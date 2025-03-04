@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { auth, database } from '@/backend/Firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import { collection } from 'firebase/firestore'
-import { getDocs } from 'firebase/firestore'
+import { getDocs, doc, deleteDoc } from 'firebase/firestore'
 
 
 const Dashboard = () => {
@@ -24,6 +24,17 @@ const Dashboard = () => {
       setMarkedBooks(booksList);
     } catch(err) {
       alert(`Error getting marked books: ${err}`);
+    }
+  }
+
+  async function removeBook(book) {
+    if (!user) returh;
+    try{
+      const bookElement = doc(database, "users", user.uid, "markedBooks", book.id);
+      await deleteDoc(bookElement);
+      showBooks();
+    }catch(err){
+      alert(`Error removing book: ${err}`)
     }
   }
 
@@ -56,13 +67,18 @@ const Dashboard = () => {
             <img
               src={book.image || "/placeholder.png"}
             />
-            <div>
+            <FlexDiv>
               <h3>{book.title}</h3>
               <p>Author: {book.authors?.join(", ") || "N/A"}</p>
-              <ButtonLink href={book.link} target="_blank">
-                More Info
-              </ButtonLink>
-            </div>
+              <ButtonLinkContainer>
+                <ButtonLink href={book.link} target="_blank">
+                  More Info
+                </ButtonLink>
+                <ButtonLink onClick={() => removeBook(book)}>
+                  Remove
+                </ButtonLink>
+              </ButtonLinkContainer>
+            </FlexDiv>
           </BookCard>)) : 
           <NoBooks>No marked books.</NoBooks>}
         </Container>
@@ -98,12 +114,19 @@ font-size: 26px;
 display: flex;
 
 `
+
+const FlexDiv = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    max-width: 400px;
+    gap: 5px;
+`
 const BookCard = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly; 
   align-items: center;
-  gap: 50px;
   height: 150px;
   border-bottom: 1px solid #ddd;
 
@@ -115,14 +138,6 @@ const BookCard = styled.div`
     border: 2px solid #ddd;
   }
 
-  div {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    max-width: 400px;
-    gap: 5px;
-  }
-
   h3 {
     font-family: 'Arial', sans-serif;
     text-overflow: ellipsis;
@@ -132,19 +147,6 @@ const BookCard = styled.div`
   p {
     text-overflow: ellipsis;
     max-width: 300px;
-  }
-
-  a {
-    font-family: 'Arial', sans-serif;
-    // text-decoration: none;
-    // color: black;
-    // padding: 7px 14px;
-    // cursor: pointer;
-    // transition: background-color 0.3s;
-    // &:hover{
-    // color:#333;
-    // };
-    // text-overflow: ellipsis;
   }
 `
 const NoBooks = styled.div`
@@ -158,15 +160,22 @@ const ButtonLink = styled.a`
   color: white;
   background-color: black;
   padding: 7px 14px;
-  margin-left: 45px;
   margin-top: 5px;
   border-radius: 30px;
   cursor: pointer;
   transition: background-color 0.3s;
   &:hover{
-  background-color:#333;
+    background-color:#333;
   };
   max-width: 100px;
 `;
+
+const ButtonLinkContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  max-width: 100%;
+  gap: 10px;
+`
 
 export default Dashboard
